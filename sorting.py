@@ -212,3 +212,32 @@ def quick_sort(nums):  # n^2
             _quick_sort(items, split_index + 1, high)
 
     _quick_sort(nums, 0, nums.get_len() - 1)
+    
+    
+  def bucket_sort(nums): # n+k
+    #Divided elements into buckets which are of specific range.
+    #Inside buckets elements are sorted by using insertion algorithm which is already given above.#we can use any algorithm for sorting inside bucket.
+    # Finally, the elements of the bucket are gathered to get the sorted array.
+ 
+    arr = [] 
+    placeholder = 10 # 10 means 10 places in placeholder
+
+    for i in range(placeholder): 
+        arr.append([]) 
+          
+    # Put array in buckets  
+    for j in nums: 
+        bucket_index = int(placeholder * j)  
+        arr[bucket_index].append(j) 
+      
+    # Sorting elements in buckets using insertion sort method written above
+    for i in range(placeholder): 
+        arr[i] = insertion_sort(arr[i]) 
+          
+    # merge result 
+    k = 0
+    for i in range(placeholder): 
+        for j in range(len(arr[i])): 
+            nums[k] = arr[i][j] 
+            k += 1
+    return nums 
